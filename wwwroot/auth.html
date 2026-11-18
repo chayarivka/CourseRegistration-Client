@@ -1,0 +1,73 @@
+﻿
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>התחברות | מרכז אופק</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/auth.js" defer></script>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">אופק<span>.</span></a>
+
+            <nav class="main-nav">
+                <a href="index.html">בית</a>
+                <a href="index.html#courses">הקורסים שלנו</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="auth-page">
+        <div class="auth-card">
+
+            <h1>ברוכה הבאה לאופק</h1>
+            <p class="auth-subtitle">
+                התחברי כדי להמשיך לקורסים שלך
+            </p>
+
+            <div class="auth-tabs">
+                <button id="loginTab" class="auth-tab active" type="button">
+                    התחברות
+                </button>
+                <button id="registerTab" class="auth-tab" type="button">
+                    יצירת חשבון
+                </button>
+            </div>
+
+            <form id="authForm">
+
+                <div id="registerFields" hidden>
+                    <label for="fullName">שם מלא</label>
+                    <input id="fullName" type="text" maxlength="100">
+
+                    <label for="phoneNumber">טלפון (לא חובה)</label>
+                    <input id="phoneNumber" type="tel">
+                </div>
+
+                <label for="email">כתובת אימייל</label>
+                <input id="email" type="email" required>
+
+                <label for="password">סיסמה</label>
+                <input id="password" type="password" required>
+
+                <p id="authMessage" class="auth-message"
+                   role="status" aria-live="polite"></p>
+
+                <button id="submitButton"
+                        class="primary-button auth-submit"
+                        type="submit">
+                    התחברות
+                </button>
+            </form>
+
+        </div>
+    </main>
+
+</body>
+</html>

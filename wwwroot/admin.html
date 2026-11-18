@@ -1,0 +1,142 @@
+﻿
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ניהול קורסים | מרכז אופק</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/auth-state.js" defer></script>
+    <script src="js/admin.js" defer></script>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                אופק<span>.</span>
+            </a>
+
+            <nav class="main-nav">
+                <a href="index.html">בית</a>
+                <a href="index.html#courses">הקורסים שלנו</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="auth.html?mode=login"
+                   class="outline-button">
+                    התחברות
+                </a>
+
+                <a href="auth.html?mode=register"
+                   class="primary-button">
+                    יצירת חשבון
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="details-page">
+
+            <a href="index.html" class="back-link">
+                <span aria-hidden="true">←</span>
+                חזרה לדף הבית
+            </a>
+
+            <h1>ניהול קורסים</h1>
+
+            <p>
+                כאן ניתן להוסיף, לערוך ולמחוק קורסים.
+            </p>
+
+            <div id="adminContent" hidden>
+
+                <button id="addCourseBtn"
+                        type="button"
+                        class="primary-button">
+                    הוספת קורס חדש
+                </button>
+
+                <form id="courseForm" class="admin-course-form" hidden>
+                    <h2>הוספת קורס חדש</h2>
+
+                    <label for="courseName">שם הקורס</label>
+                    <input id="courseName" name="name" type="text"
+                           maxlength="150" required>
+
+                    <label for="courseDescription">תיאור הקורס</label>
+                    <textarea id="courseDescription" name="description"
+                              maxlength="2000" required></textarea>
+
+                    <label for="coursePrice">מחיר</label>
+                    <input id="coursePrice" name="price" type="number"
+                           min="0" max="99999999" step="0.01" required>
+
+                    <label for="courseStartDate">תאריך התחלה</label>
+                    <input id="courseStartDate" name="startDate"
+                           type="date" required>
+
+                    <label for="courseStartTime">שעת התחלה</label>
+                    <input id="courseStartTime" name="startTime"
+                           type="time" required>
+
+                    <label for="courseLecturer">שם המרצה</label>
+                    <input id="courseLecturer" name="lecturerName"
+                           type="text" maxlength="100" required>
+
+                    <label for="courseMeetings">מספר מפגשים</label>
+                    <input id="courseMeetings" name="numberOfMeetings"
+                           type="number" min="1" step="1" required>
+
+                    <label for="courseCapacity">מספר מקומות</label>
+                    <input id="courseCapacity" name="capacity"
+                           type="number" min="1" step="1" required>
+
+                    <label for="courseCategory">קטגוריה</label>
+                    <select id="courseCategory" name="categoryId" required>
+                        <option value="">בחרי קטגוריה</option>
+                    </select>
+
+                    <div class="form-actions">
+                        <button type="submit" class="primary-button">
+                            שמירת הקורס
+                        </button>
+                        <button type="button" id="cancelCourseBtn"
+                                class="outline-button">
+                            ביטול
+                        </button>
+                    </div>
+
+                    <p id="courseFormMessage" role="status"></p>
+                </form>
+
+
+
+                <h2>רשימת הקורסים</h2>
+
+                <div id="adminCourses">
+                    <p>טוענים קורסים...</p>
+                </div>
+
+            </div>
+
+            <p id="adminMessage" role="status">
+                בודקים הרשאות...
+            </p>
+
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© מרכז אופק | כל הזכויות שמורות</p>
+        </div>
+    </footer>
+
+</body>
+</html>
