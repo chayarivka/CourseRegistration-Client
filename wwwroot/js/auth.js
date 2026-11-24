@@ -1,4 +1,4 @@
-﻿const AUTH_API_URL = "https://localhost:7069/api/Auth";
+﻿const AUTH_API_URL = `${API_BASE_URL}/Auth`;
 const loginTab = document.getElementById("loginTab");
 const registerTab = document.getElementById("registerTab");
 const registerFields = document.getElementById("registerFields");

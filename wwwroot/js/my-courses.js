@@ -1,6 +1,6 @@
 ﻿
 const MY_COURSES_API_URL =
-    "https://localhost:7069/api/Registrations/my-courses";
+    `${API_BASE_URL}/Registrations/my-courses`
 
 async function loadMyCourses() {
     const container = document.getElementById("myCourses");
@@ -111,7 +111,7 @@ async function cancelRegistration(courseId, button) {
 
     try {
         const response = await fetch(
-            `https://localhost:7069/api/Registrations/${courseId}`,
+            `${API_BASE_URL}/Registrations/${courseId}`,
             {
                 method: "DELETE",
                 headers: {

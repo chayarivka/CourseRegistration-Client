@@ -1,5 +1,5 @@
 ﻿
-const API_BASE_URL = "https://localhost:7069/api/Courses";
+const COURSES_API_URL = `${API_BASE_URL}/Courses`;
 
 document.addEventListener("DOMContentLoaded", loadCourseDetails);
 
@@ -15,7 +15,7 @@ async function loadCourseDetails() {
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/${courseId}`);
+        const response = await fetch(`${COURSES_API_URL}/${courseId}`);
 
         if (!response.ok) {
             throw new Error("Course could not be loaded");
@@ -118,7 +118,7 @@ async function registerToCourse(courseId, button) {
 
     try {
         const response = await fetch(
-            `https://localhost:7069/api/Registrations/${courseId}`,
+            `${API_BASE_URL}/Registrations/${courseId}`,
             {
                 method: "POST",
                 headers: {

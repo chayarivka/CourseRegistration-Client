@@ -1,5 +1,5 @@
 ﻿
-const API_URL = "https://localhost:7069/api/Courses";
+const API_URL = `${API_BASE_URL}/Courses`;
 
 document.addEventListener("DOMContentLoaded", loadCourses);
 

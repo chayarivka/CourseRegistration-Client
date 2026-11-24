@@ -1,5 +1,5 @@
 ﻿
-const ADMIN_API_BASE = "https://localhost:7069/api";
+const ADMIN_API_BASE = API_BASE_URL;
 let editingCourse = null;
 
 document.addEventListener("DOMContentLoaded", () => {
