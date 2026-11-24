@@ -1,21 +1,89 @@
 ﻿
 const API_URL = `${API_BASE_URL}/Courses`;
 
-document.addEventListener("DOMContentLoaded", loadCourses);
+let currentPage = 1;
+const pageSize = 2;
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    document.getElementById("searchButton")
+        .addEventListener("click", () => {
+            currentPage = 1;
+            loadCourses();
+        });
+
+    document.getElementById("prevPage")
+        .addEventListener("click", () => {
+            if (currentPage > 1) {
+                currentPage--;
+                loadCourses();
+            }
+        });
+
+    document.getElementById("nextPage")
+        .addEventListener("click", () => {
+            currentPage++;
+            loadCourses();
+        });
+    document.getElementById("resetFilters")
+        .addEventListener("click", () => {
+
+            document.getElementById("searchInput").value = "";
+            document.getElementById("categoryFilter").value = "";
+            document.getElementById("sortFilter").value = "StartDate";
+            document.getElementById("sortDirection").value = "false";
+
+            currentPage = 1;
+            loadCourses();
+        });
+    loadCategories();
+    loadCourses();
+});
 
 async function loadCourses() {
     const container = document.getElementById("coursesList");
 
-    container.innerHTML = '<p class="empty-message">טוענים קורסים...</p>';
+    if (!container.querySelector(".course-card")) {
+        container.innerHTML =
+            '<p class="empty-message">טוענים קורסים...</p>';
+    }
 
     try {
-        const response = await fetch(API_URL);
+        const params = new URLSearchParams({
+            Page: currentPage,
+            PageSize: pageSize,
+            Search: document.getElementById("searchInput").value.trim(),
+            SortBy: document.getElementById("sortFilter").value,
+            Descending: document.getElementById("sortDirection").value
+        });
+
+        const categoryId =
+            document.getElementById("categoryFilter").value;
+
+        if (categoryId) {
+            params.set("CategoryId", categoryId);
+        }
+
+        const response = await fetch(`${API_URL}?${params.toString()}`);
 
         if (!response.ok) {
             throw new Error("Failed to load courses");
         }
 
         const courses = await response.json();
+        document.getElementById("pageNumber").textContent =
+            `עמוד ${currentPage}`;
+
+        document.getElementById("prevPage").disabled =
+            currentPage === 1;
+
+        document.getElementById("nextPage").disabled =
+            courses.length < pageSize;
+        if (courses.length === 0 && currentPage > 1) {
+            currentPage--;
+            await loadCourses();
+            return;
+        }
 
         if (courses.length === 0) {
             container.innerHTML =
@@ -25,9 +93,10 @@ async function loadCourses() {
 
         container.innerHTML = "";
 
-        courses.forEach(course => {
+        courses.forEach((course, index) => {
             const card = document.createElement("article");
             card.className = "course-card";
+            card.style.animationDelay = `${index * 100}ms`;
 
             const startDate = new Date(course.startDate)
                 .toLocaleDateString("he-IL");
@@ -86,5 +155,32 @@ async function loadCourses() {
 
         container.innerHTML =
             '<p class="empty-message">לא ניתן לטעון את הקורסים כרגע.</p>';
+    }
+}
+async function loadCategories() {
+    const select = document.getElementById("categoryFilter");
+
+    try {
+        const response = await fetch(
+            `${API_BASE_URL}/Categories`
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to load categories");
+        }
+
+        const categories = await response.json();
+
+        categories.forEach(category => {
+            const option = document.createElement("option");
+
+            option.value = category.id;
+            option.textContent = category.name;
+
+            select.appendChild(option);
+        });
+
+    } catch (error) {
+        console.error(error);
     }
 }

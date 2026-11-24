@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>מרכז אופק | קורסים והכשרות</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=2">
     <script src="js/config.js"></script>
     <script src="js/app.js" defer></script>
     <script src="js/auth-state.js" defer></script>
@@ -59,11 +59,51 @@
                     </div>
                     <p>בחרי את הקורס המתאים לך.</p>
                 </div>
+                <div class="courses-filters">
 
+                    <input type="search"
+                           id="searchInput"
+                           placeholder="חיפוש לפי שם קורס...">
+
+                    <select id="categoryFilter">
+                        <option value="">כל הקטגוריות</option>
+                    </select>
+
+                    <select id="sortFilter">
+                        <option value="StartDate">מיון לפי תאריך</option>
+                        <option value="Price">מיון לפי מחיר</option>
+                    </select>
+
+                    <select id="sortDirection">
+                        <option value="false">סדר עולה</option>
+                        <option value="true">סדר יורד</option>
+                    </select>
+
+                    <button id="searchButton" class="primary-button">
+                        חיפוש
+                    </button>
+                    <button id="resetFilters" class="outline-button">
+                        ניקוי סינון
+                    </button>
+
+                </div>
                 <div id="coursesList" class="courses-grid">
                     <p class="empty-message">
                         הקורסים יוצגו כאן בקרוב.
                     </p>
+                </div>
+                <div class="pagination">
+
+                    <button id="prevPage" class="outline-button" disabled>
+                        הקודם
+                    </button>
+
+                    <span id="pageNumber">עמוד 1</span>
+
+                    <button id="nextPage" class="outline-button">
+                        הבא
+                    </button>
+
                 </div>
             </div>
         </section>

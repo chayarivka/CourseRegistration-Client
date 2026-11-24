@@ -672,6 +672,109 @@ form.admin-course-form {
     }
 }
 
-   
+@keyframes courseSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(65px) scale(0.9) rotate(-3deg);
+    }
 
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1) rotate(0);
+    }
+}
 
+.courses-grid .course-card {
+    animation: courseSlideIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.courses-filters {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 22px;
+    margin-bottom: 30px;
+    background: var(--sage);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+    .courses-filters input,
+    .courses-filters select {
+        width: 100%;
+        min-width: 0;
+        height: 46px;
+        padding: 0 14px;
+        border: 1px solid #b7c7ba;
+        border-radius: 8px;
+        background: var(--surface);
+        color: var(--green);
+        font: inherit;
+        font-size: 14px;
+        transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+        .courses-filters input:focus,
+        .courses-filters select:focus {
+            outline: none;
+            border-color: #71877b;
+            box-shadow: 0 0 0 4px #71877b20;
+        }
+
+    .courses-filters select {
+        cursor: pointer;
+    }
+
+    .courses-filters button {
+        height: 46px;
+        border-radius: 8px;
+        padding: 0 28px;
+        transition: background 0.25s, transform 0.25s;
+    }
+
+        .courses-filters button:hover {
+            transform: translateY(-2px);
+        }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 35px;
+}
+
+    .pagination button {
+        transition: background 0.25s, transform 0.25s;
+    }
+
+        .pagination button:not(:disabled):hover {
+            transform: translateY(-2px);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+#pageNumber {
+    font-weight: 600;
+    color: var(--green);
+}
+
+@media (max-width: 900px) {
+    .courses-filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+        .courses-filters input,
+        .courses-filters button {
+            grid-column: 1 / -1;
+        }
+}
+
+@media (max-width: 500px) {
+    .courses-filters {
+        grid-template-columns: 1fr;
+    }
+}
