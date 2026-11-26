@@ -132,7 +132,24 @@ async function registerToCourse(courseId, button) {
             return;
         }
         if (response.status === 409) {
-            throw new Error("את כבר רשומה לקורס זה.");
+            const errorBody = await response.json().catch(() => null);
+            let message = "לא ניתן להשלים את ההרשמה. ייתכן שפרטי הקורס השתנו.";
+
+            switch (errorBody?.message) {
+                case "Course is full.":
+                    message = "הקורס מלא. לא נותרו מקומות פנויים.";
+                    break;
+                case "User is already registered to this course.":
+                    message = "את כבר רשומה לקורס זה.";
+                    break;
+                case "Registration is closed for this course.":
+                    message = "ההרשמה לקורס הסתיימה.";
+                    break;
+            }
+
+            alert(message);
+            await loadCourseDetails();
+            return;
         }
 
         if (!response.ok) {
